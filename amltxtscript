@@ -1,2 +1,0 @@
-fatload mmc 0 82000000 uImage_recovery
-bootm 82000000
