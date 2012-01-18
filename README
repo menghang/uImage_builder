@@ -2,21 +2,25 @@
 TEMPORARY README:
 ---
 Before launching "build-image.sh" you must build Android (AOSP or CyanogenMod)!
-Than make a new folder in your device directory in AOSP
+Than make a new folder in your device directory
 
-	$ mkdir ...AOSP/device/amlogic/aml8726m/NEWDIR
+	$ mkdir ...AOSP/device/amlogic/tm809/NEWFOLDER
 
-copy "build-image.sh", "amltxtscript", "mkimage"
-copy vendor "uImage", "uImage_recovey" (preferred V0629.20-C_CH@20110719)
+copy "build-image.sh", "build-uImage_recovery.sh", "mkimage"
+copy vendor "uImage" (same version of "update.zip")
+copy vendor "uImage_recovey" (work only with V0629.20-C_CH@20110719)
 from " http://www.ainol.com/plugin.php?identifier=ainol&module=download&action=info&downloadid=66 "
 launch
 	$ ./build-image.sh
+	$ ./build-image_recovery.sh
 
-will make a new folder in AOSP out directory with new
+will make two new folders in AOSP out directory with new
 "uImage" "boot.img" "uImage_recovey" "aml_autoscript"
 ---
-Tested with naobsd project " https://github.com/naobsd/cm_device_amlogic_aml8726m "
-Thanks naobsd! Thanks cyanogen developers! Thanks GOOGLE developers!
+Tested with my project " https://github.com/psquare/cm_device_amlogic_tm809 "
+Thanks to
+_fun and cheeyee for your thread
+" http://forum.xda-developers.com/showthread.php?t=1312927 "
 ---
 see you soon for new features!
 ENJOY! ;)
