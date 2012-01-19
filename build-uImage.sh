@@ -24,24 +24,25 @@ WORKDIR=NEWBOOT
 #
 UIMAGE=uImage
 #
+FWD=`pwd`
+cd $FWD/../../../../out/target/product/$DEVICE
+SWD=`pwd`
+#
 #####-----
 #
 ##////////////////////////////////////////////////////////////
 # GO!
 ##////////////////////////////////////////////////////////////
 #
-FWD=`pwd`
-cd $FWD/../../../../out/target/product/$DEVICE
 echo '>>>>> Remove old files'
 rm -rf $WORKDIR
 mkdir -p $WORKDIR
 echo '>>>>> Build initramfs'
-cd $FWD/../../../../out/target/product/$DEVICE/root
+cd $SWD/root
 find * | cpio -C 1 -R root:root -H newc -o > ../$WORKDIR/initramfs.new.cpio
-cp $FWD/${UIMAGE} $FWD/../../../../out/target/product/$DEVICE/$WORKDIR
-cp $FWD/mkimage $FWD/../../../../out/target/product/$DEVICE/$WORKDIR
-cd $FWD/../../../../out/target/product/$DEVICE/$WORKDIR
-SWD=`pwd`
+cp $FWD/${UIMAGE} $SWD/$WORKDIR
+cp $FWD/mkimage $SWD/$WORKDIR
+cd $SWD/$WORKDIR
 #
 ##////////////////////////////////////////////////////////////
 # Checking for uImage magic word

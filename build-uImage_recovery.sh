@@ -24,24 +24,25 @@ WORKDIR=NEWRECOVERY
 #
 UIMAGER=uImage_recovery
 #
+FWD=`pwd`
+cd $FWD/../../../../out/target/product/$DEVICE
+SWD=`pwd`
+#
 #####-----
 #
 ##////////////////////////////////////////////////////////////
 # GO!
 ##////////////////////////////////////////////////////////////
 #
-FWD=`pwd`
-cd $FWD/../../../../out/target/product/$DEVICE
 echo '>>>>> Remove old files'
 rm -rf $WORKDIR
 mkdir -p $WORKDIR
 echo '>>>>> Build initramfs'
-cd $FWD/../../../../out/target/product/$DEVICE/recovery/root
+cd $SWD/recovery/root
 find * | cpio -C 1 -R root:root -H newc -o > ../../$WORKDIR/initramfs_rec.new.cpio
-cp $FWD/${UIMAGER} $FWD/../../../../out/target/product/$DEVICE/$WORKDIR
-cp $FWD/mkimage $FWD/../../../../out/target/product/$DEVICE/$WORKDIR
-cd $FWD/../../../../out/target/product/$DEVICE/$WORKDIR
-SWD=`pwd`
+cp $FWD/${UIMAGER} $SWD/$WORKDIR
+cp $FWD/mkimage $SWD/$WORKDIR
+cd $SWD/$WORKDIR
 #
 ##////////////////////////////////////////////////////////////
 # Checking for uImage_recovery magic word
@@ -136,7 +137,7 @@ lzma < ${IMAGENEWR} > ${IMAGENEWLZMAR}
 #
 echo ">>>>> Making uImage_recovery"
 #
-(cat << EOF) > $SWD/amltxtscript
+(cat << EOF) > $SWD/$WORKDIR/amltxtscript
 fatload mmc 0 82000000 uImage_recovery
 bootm 82000000
 EOF
