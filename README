@@ -17,7 +17,7 @@ launch
 will make two new folders in AOSP out directory with new
 "uImage" "boot.img" "uImage_recovey" "aml_autoscript"
 ---
-Tested with my project " https://github.com/psquare/cm_device_amlogic_tm809 "
+Tested with my project " https://github.com/psquare/cm_device_amlogic_tm809-g "
 Thanks to
 _fun and cheeyee for your thread
 " http://forum.xda-developers.com/showthread.php?t=1312927 "
