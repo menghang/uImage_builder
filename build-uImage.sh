@@ -19,7 +19,7 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #
 #
-DEVICE=tm809
+DEVICE=$1
 WORKDIR=NEWBOOT
 #
 UIMAGE=uImage
@@ -40,7 +40,7 @@ mkdir -p $WORKDIR
 echo '>>>>> Build initramfs'
 cd $SWD/root
 find * | cpio -C 1 -R root:root -H newc -o > ../$WORKDIR/initramfs.new.cpio
-cp $FWD/${UIMAGE} $SWD/$WORKDIR
+cp $FWD/$DEVICE/${UIMAGE} $SWD/$WORKDIR
 cp $FWD/mkimage $SWD/$WORKDIR
 cd $SWD/$WORKDIR
 #
@@ -49,7 +49,7 @@ cd $SWD/$WORKDIR
 # http://linux-arm.org/git?p=u-boot-armdev.git;a=blob;f=include/image.h
 ##////////////////////////////////////////////////////////////
 #
-echo ">>>>> Checking for uImage magic word ( 27051956 ) :"
+echo '>>>>> Checking for uImage magic word ( 27051956 ) :'
 MAGICWORD1=`dd if="${UIMAGE}" ibs=1 count=4 | hexdump -v -e '4/1 "%02X"'`
 if [ '27051956' != "$MAGICWORD1" ]
 	then

@@ -1,18 +1,18 @@
 
 TEMPORARY README:
 ---
-Before launching "build-image.sh" you must build Android (AOSP or CyanogenMod)!
-Than make a new folder in your device directory
+Before launching this scripts you must build Android (AOSP or CyanogenMod)!
+Than copy "uImage_builder" folder in your device directory
 
-	$ mkdir ...AOSP/device/amlogic/tm809/NEWFOLDER
+	$ ...AOSP/device/amlogic/YOUR-DEVICE/uImage_builder
 
-copy "build-image.sh", "build-uImage_recovery.sh", "mkimage"
-copy vendor "uImage" (same version of "update.zip")
-copy vendor "uImage_recovey" (work only with V0629.20-C_CH@20110719)
-from " http://www.ainol.com/plugin.php?identifier=ainol&module=download&action=info&downloadid=66 "
-launch
-	$ ./build-image.sh
-	$ ./build-image_recovery.sh
+and launch
+	$ ./build-image.sh YOUR-DEVICE
+	$ ./build-image_recovery.sh YOUR-DEVICE
+
+ES:
+	$ ./build-image.sh tm809
+
 
 will make two new folders in AOSP out directory with new
 "uImage" "boot.img" "uImage_recovey" "aml_autoscript"
@@ -24,3 +24,8 @@ _fun and cheeyee for your thread
 ---
 see you soon for new features!
 ENJOY! ;)
+
+------------------------------DB DEVICES------------------------------
+
+Ainol Novo8 = tm809
+
