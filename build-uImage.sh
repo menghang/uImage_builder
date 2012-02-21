@@ -1,7 +1,7 @@
 #!/bin/sh
 
 #
-# Copyright (C) 2011 Pasquale Convertini    aka psquare (psquare.dev@gmail.com)
+# Copyright (C) 2011-2012 Pasquale Convertini    aka psquare (psquare.dev@gmail.com)
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -65,7 +65,13 @@ fi
 #
 echo '>>>>> Remove header from uImage'
 IMAGEOLDLZMA='Image.old.lzma'
-dd if=${UIMAGE} bs=1 skip=64 of=${IMAGEOLDLZMA}
+if [ "$DEVICE" == 'ZT280_C91-3a' ]
+	then
+		SKIPBIT=128
+	else
+		SKIPBIT=64
+fi
+dd if=${UIMAGE} bs=1 skip=$SKIPBIT of=${IMAGEOLDLZMA}
 #
 ##////////////////////////////////////////////////////////////
 # Extracting kernel from uImages
