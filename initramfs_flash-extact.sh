@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 UIMAGE=$1
 

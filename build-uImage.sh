@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 #
 # Copyright (C) 2011-2012 Pasquale Convertini    aka psquare (psquare.dev@gmail.com)
