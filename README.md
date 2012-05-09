@@ -4,7 +4,7 @@
 ## HOWTO
 
 Before launching this scripts you must build Android.
-Later copy "uImage_builder" folder in your device directory
+Later copy "__uImage_builder__" folder in your device directory
 
 ``` bash
 $ ...AOSP/device/amlogic/YOUR-DEVICE/uImage_builder
@@ -28,11 +28,11 @@ for their thread http://forum.xda-developers.com/showthread.php?t=1312927
 
 ## DB DEVICES
 
-Ainol Novo8 Advanced - tm809 - 2.3.4
+Ainol Novo8 Advanced --- `tm809` --- 2.3.4
 [ http://www.ainol.com/plugin.php?identifier=ainol&module=product&action=info&productid=38 ]
 
-Zenithink C91 3a - ZT280_C91-3a - 4.0.3
+Zenithink C91 3a --- `ZT280_C91-3a` --- 4.0.3
 [ http://www.zenithink.com/Eproducts_C91.php?download ]
 
-Yinlips YDP-G18 v1 - Yinlips YDPG18 - 2.2.1
+Yinlips YDP-G18 v1 --- `YDP-G18-v1` --- 2.2.1
 
