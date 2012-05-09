@@ -19,17 +19,18 @@ Later copy "__uImage_builder__" folder in your device directory
 	$ ./build-image.sh YOUR-DEVICE
 	$ ./build-image_recovery.sh YOUR-DEVICE
 
- __ex:__
+ __example:__
 
 	$ ./build-image.sh tm809
+	$ ./build-image_recovery.sh tm809
 will make two new folders in AOSP out directory with new
-"**uImage**" "**boot.img**" "**uImage_recovey**" "**aml_autoscript**"
+"**uImage**" "**boot.img**" - "**uImage_recovey**" "**aml_autoscript**"
 
 ---
 
 ## DB DEVICES
-[Ainol Novo8 Advanced]( http://www.ainol.com/plugin.php?identifier=ainol&module=product&action=info&productid=38/ "link for last official firmware") _kernel 2.3.4_ --> `tm809`
+[Ainol Novo8 Advanced]( http://www.ainol.com/plugin.php?identifier=ainol&module=product&action=info&productid=38/ "link for last official firmware") - _kernel 2.3.4_ --> `tm809`
 
-[Zenithink C91 3a]( http://www.zenithink.com/Eproducts_C91.php?download ) _kernel 4.0.3_ --> `ZT280_C91-3a`
+[Zenithink C91 3a]( http://www.zenithink.com/Eproducts_C91.php?download ) - _kernel 4.0.3_ --> `ZT280_C91-3a`
 
-Yinlips YDP-G18 v1 _kernel 2.2.1_ --> `YDP-G18-v1`
+Yinlips YDP-G18 v1 - _kernel 2.2.1_ --> `YDP-G18-v1`
