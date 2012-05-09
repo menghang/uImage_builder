@@ -1,38 +1,35 @@
 
 # uImage_builder
 
+***
+
+### THANKS to
+__fun_/naobsd__ and __cheeyee__
+for [their thread]( http://forum.xda-developers.com/showthread.php?t=1312927 )
+
+---
+
 ## HOWTO
 
 Before launching this scripts you must build Android.
 Later copy "__uImage_builder__" folder in your device directory
 
-``` bash
-$ ...AOSP/device/amlogic/YOUR-DEVICE/uImage_builder
-
-$ cd uImage_builder
-$ ./build-image.sh YOUR-DEVICE
-$ ./build-image_recovery.sh YOUR-DEVICE
-```
+	$ ...AOSP/device/amlogic/YOUR-DEVICE/uImage_builder
+	$ cd uImage_builder
+	$ ./build-image.sh YOUR-DEVICE
+	$ ./build-image_recovery.sh YOUR-DEVICE
 
  __ex:__
-``` bash
- $ ./build-image.sh tm809
-```
 
+	$ ./build-image.sh tm809
 will make two new folders in AOSP out directory with new
-"__uImage__" "__boot.img__" "__uImage_recovey__" "__aml_autoscript__"
+"**uImage**" "**boot.img**" "**uImage_recovey**" "**aml_autoscript**"
 
-### THANKS to
-__fun_/naobsd__ and __cheeyee__
-for their thread http://forum.xda-developers.com/showthread.php?t=1312927
+---
 
 ## DB DEVICES
+[Ainol Novo8 Advanced]( http://www.ainol.com/plugin.php?identifier=ainol&module=product&action=info&productid=38/ "link for last official firmware") _kernel 2.3.4_ --> `tm809`
 
-Ainol Novo8 Advanced --- `tm809` --- 2.3.4
-[ http://www.ainol.com/plugin.php?identifier=ainol&module=product&action=info&productid=38 ]
+[Zenithink C91 3a]( http://www.zenithink.com/Eproducts_C91.php?download ) _kernel 4.0.3_ --> `ZT280_C91-3a`
 
-Zenithink C91 3a --- `ZT280_C91-3a` --- 4.0.3
-[ http://www.zenithink.com/Eproducts_C91.php?download ]
-
-Yinlips YDP-G18 v1 --- `YDP-G18-v1` --- 2.2.1
-
+Yinlips YDP-G18 v1 _kernel 2.2.1_ --> `YDP-G18-v1`
