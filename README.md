@@ -14,8 +14,8 @@ for [their thread]( http://forum.xda-developers.com/showthread.php?t=1312927 )
 Before launching this scripts you must build Android.
 Later copy "__uImage_builder__" folder in your device directory
 
-	$ ...AOSP/device/amlogic/YOUR-DEVICE/uImage_builder
-	$ cd uImage_builder
+	$ cp uImage_builder $AOSP/device/amlogic/YOUR-DEVICE/uImage_builder
+	$ cd $AOSP/device/amlogic/YOUR-DEVICE/uImage_builder
 	$ ./build-image.sh YOUR-DEVICE
 	$ ./build-image_recovery.sh YOUR-DEVICE
 
