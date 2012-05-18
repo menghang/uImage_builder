@@ -29,6 +29,10 @@ will make two new folders in AOSP out directory with new
 
 ---
 
+The overclock-uImage.sh is tested only for **tm809**. Please pay attention!
+
+---
+
 ## DB DEVICES
 [Ainol Novo8 Advanced]( http://www.ainol.com/plugin.php?identifier=ainol&module=product&action=info&productid=38/ "link to official page") - _kernel 2.3.4_ --> `tm809`
 

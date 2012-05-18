@@ -25,8 +25,8 @@ WORKDIR=NEWBOOT
 UIMAGE=uImage
 #
 FWD=`pwd`
-cd $FWD/../../../../out/target/product/$DEVICE
-#<>#cd $FWD/IMAGES
+#<>#cd $FWD/../../../../out/target/product/$DEVICE
+cd $FWD/IMAGES
 SWD=`pwd`
 #
 #####-----
@@ -38,9 +38,9 @@ SWD=`pwd`
 echo '>>>>> Remove old files'
 rm -rf $WORKDIR
 mkdir -p $WORKDIR
-echo '>>>>> Build initramfs'
-cd $SWD/root
-find * | cpio -C 1 -R root:root -H newc -o > ../$WORKDIR/initramfs.new.cpio
+#<>#echo '>>>>> Build initramfs'
+#<>#cd $SWD/root
+#<>#find * | cpio -C 1 -R root:root -H newc -o > ../$WORKDIR/initramfs.new.cpio
 cp $FWD/$DEVICE/${UIMAGE} $SWD/$WORKDIR
 cp $FWD/mkimage $SWD/$WORKDIR
 cd $SWD/$WORKDIR
@@ -88,7 +88,7 @@ unlzma < ${IMAGEOLDLZMA} > ${IMAGE}
 #
 #echo "Extracting config from kernel"
 #PRECONFIG=`grep -a -b -m 1 -o -P '\x1F\x8B\x08' ${IMAGE} | cut -f 1 -d :`
-#dd if=${IMAGE} bs=1 skip=$PRECONFIG | gunzip > ../config
+#dd if=${IMAGE} bs=1 skip=$PRECONFIG | gunzip > config
 #
 ##////////////////////////////////////////////////////////////
 #Extracting initramfs
@@ -113,19 +113,19 @@ cd $OLDINITRAMFSDIR
 cpio -v -i --no-absolute-filenames < ../initramfs.old.cpio
 cd ..             
 #<>#
-#cp initramfs.old.cpio initramfs.new.cpio
+cp initramfs.old.cpio initramfs.new.cpio
 #
 ##////////////////////////////////////////////////////////////
 # Overclock
 ##////////////////////////////////////////////////////////////
 #
 #overclock to 1050Mhz 0x3e95ba80
-#sed 's/\x00\x46\xc3\x23\x00\xc2\xeb\x0b\x00\xca\x9a\x3b/\x00\x46\xc3\x23\x00\xc2\xeb\x0b\x80\xba\x95\x3e/' ${IMAGE} > Image-overclocked
+sed 's/\x00\x46\xc3\x23\x00\xc2\xeb\x0b\x00\xca\x9a\x3b/\x00\x46\xc3\x23\x00\xc2\xeb\x0b\x80\xba\x95\x3e/' ${IMAGE} > Image-overclocked
 #
 #overclock to 1090Mhz 0x40f81480 (like cheeyee's ROM)
 #sed 's/\x00\x46\xc3\x23\x00\xc2\xeb\x0b\x00\xca\x9a\x3b/\x00\x46\xc3\x23\x00\xc2\xeb\x0b\x80\x14\xf8\x40/' ${IMAGE} > Image-overclocked
 #
-#mv Image-overclocked $IMAGE
+mv Image-overclocked $IMAGE
 #<>#
 ##////////////////////////////////////////////////////////////
 # Fix initramfs size
