@@ -18,34 +18,15 @@
 # along with this program; write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #
-
-##### OLD WAY #####
-##########################################################################################
-#DEVICE=$1
 #
-#IWD=`pwd`
-#cd $IWD/$DEVICE
-#
-#mkdir initramfs
-#cp uImage initramfs/uImage
-#cd $IWD/$DEVICE/initramfs
-#tail -c +65 uImage | lzma -dc | tail -c +$((pos+1)) | cpio -i --no-absolute-filenames
-##tail -c +129 uImage | lzma -dc | tail -c +$((pos+1)) | cpio -i --no-absolute-filenames
-#rm uImage
-#echo ' '
-#echo ' '
-#echo "initramfs extracted into $IWD/$DEVICE/initramfs"
-##########################################################################################
-#
-
 DEVICE=$1
-WORKDIR=INITRAMFS
+WORKDIR=NEWBOOT
 #
 UIMAGE=uImage
 #
 FWD=`pwd`
 #<>#cd $FWD/../../../../out/target/product/$DEVICE
-cd $FWD/IMAGES/$WORKDIR
+cd $FWD/IMAGES/NEWKERNEL/$DEVICE
 SWD=`pwd`
 #
 #####-----
@@ -55,14 +36,14 @@ SWD=`pwd`
 ##////////////////////////////////////////////////////////////
 #
 echo '>>>>> Remove old files'
-rm -rf $DEVICE
-mkdir -p $DEVICE
-#echo '>>>>> Build initramfs'
-#cd $SWD/root
-#find * | cpio -C 1 -R root:root -H newc -o > ../$WORKDIR/initramfs.new.cpio
-cp $FWD/$DEVICE/${UIMAGE} $SWD/$DEVICE
-cp $FWD/mkimage $SWD/$DEVICE
-cd $SWD/$DEVICE
+rm -rf $WORKDIR
+mkdir -p $WORKDIR
+echo '>>>>> Build initramfs'
+cd $SWD/root
+find * | cpio -C 1 -R root:root -H newc -o > ../$WORKDIR/initramfs.new.cpio
+cp $FWD/$DEVICE/${UIMAGE} $SWD/$WORKDIR
+cp $FWD/mkimage $SWD/$WORKDIR
+cd $SWD/$WORKDIR
 #
 ##////////////////////////////////////////////////////////////
 # Checking for uImage magic word
@@ -105,9 +86,9 @@ unlzma < ${IMAGEOLDLZMA} > ${IMAGE}
 # Extracting config from kernel
 ##////////////////////////////////////////////////////////////
 #
-echo "Extracting config from kernel"
-PRECONFIG=`grep -a -b -m 1 -o -P '\x1F\x8B\x08' ${IMAGE} | cut -f 1 -d :`
-dd if=${IMAGE} bs=1 skip=$PRECONFIG | gunzip > ${UIMAGE}-kernel-config
+#echo "Extracting config from kernel"
+#PRECONFIG=`grep -a -b -m 1 -o -P '\x1F\x8B\x08' ${IMAGE} | cut -f 1 -d :`
+#dd if=${IMAGE} bs=1 skip=$PRECONFIG | gunzip > ../config
 #
 ##////////////////////////////////////////////////////////////
 #Extracting initramfs
@@ -150,42 +131,42 @@ cd ..
 # Fix initramfs size
 ##////////////////////////////////////////////////////////////
 #
-#echo '>>>>> Fix initramfs size'
-#CPIOOLDSIZE=`ls -l initramfs.old.cpio | awk '{ print $5 }'`
-#CPIONEWSIZE=`ls -l initramfs.new.cpio | awk '{ print $5 }'`
-#if [ "$CPIONEWSIZE" -gt "$CPIOOLDSIZE" ]
-#	then
-#		echo "Sorry, initramfs.new.cpio exceeds $((CPIONEWSIZE-CPIOOLDSIZE)) bytes!"
-#		exit 1
-#else
-#	CPIOPADDING=$((CPIOOLDSIZE - CPIONEWSIZE))
-#	echo "Add $CPIOPADDING bytes to initramfs.new.cpio"
-#fi
-#cp initramfs.new.cpio initramfs.newfixed.cpio
-#dd if=/dev/zero bs=1 count=$CPIOPADDING >> initramfs.newfixed.cpio
-#echo '>>>>> Size of initramfs fixed!'
+echo '>>>>> Fix initramfs size'
+CPIOOLDSIZE=`ls -l initramfs.old.cpio | awk '{ print $5 }'`
+CPIONEWSIZE=`ls -l initramfs.new.cpio | awk '{ print $5 }'`
+if [ "$CPIONEWSIZE" -gt "$CPIOOLDSIZE" ]
+	then
+		echo "Sorry, initramfs.new.cpio exceeds $((CPIONEWSIZE-CPIOOLDSIZE)) bytes!"
+		exit 1
+else
+	CPIOPADDING=$((CPIOOLDSIZE - CPIONEWSIZE))
+	echo "Add $CPIOPADDING bytes to initramfs.new.cpio"
+fi
+cp initramfs.new.cpio initramfs.newfixed.cpio
+dd if=/dev/zero bs=1 count=$CPIOPADDING >> initramfs.newfixed.cpio
+echo '>>>>> Size of initramfs fixed!'
 #
 ##////////////////////////////////////////////////////////////
 # Rebuilding kernel Image
 ##////////////////////////////////////////////////////////////
 #
-#echo '>>>>> Rebuilding kernel Image'
-#IMAGENEW='Image.new'
-#IMAGENEWLZMA='Image.new.lzma'
-#dd if=${IMAGE} bs=1 count=$CPIOSTART of=${IMAGENEW}
-#cat initramfs.newfixed.cpio >> ${IMAGENEW}
-#dd if=${IMAGE} bs=1 skip=$CPIOEND >> ${IMAGENEW}
-#echo ">>>>> Compressing kernel Image to LZMA"
-#lzma < ${IMAGENEW} > ${IMAGENEWLZMA}
+echo '>>>>> Rebuilding kernel Image'
+IMAGENEW='Image.new'
+IMAGENEWLZMA='Image.new.lzma'
+dd if=${IMAGE} bs=1 count=$CPIOSTART of=${IMAGENEW}
+cat initramfs.newfixed.cpio >> ${IMAGENEW}
+dd if=${IMAGE} bs=1 skip=$CPIOEND >> ${IMAGENEW}
+echo ">>>>> Compressing kernel Image to LZMA"
+lzma < ${IMAGENEW} > ${IMAGENEWLZMA}
 #
 ##////////////////////////////////////////////////////////////
 # Building uImage
 ##////////////////////////////////////////////////////////////
 #
-#echo ">>>>> Making uImage"
-#mv uImage uImage-orig
-#./mkimage -A arm -O linux -T kernel -C lzma -a 80008000 -e 80008000 -d Image.new.lzma -n PsquareKernel uImage
-#cp uImage boot.img
+echo ">>>>> Making uImage"
+mv uImage uImage-orig
+./mkimage -A arm -O linux -T kernel -C lzma -a 80008000 -e 80008000 -d Image.new.lzma -n PsquareKernel uImage
+cp uImage boot.img
 #
-#echo '>>>>> New kernel ready! <<<<<'
+echo '>>>>> New kernel ready! <<<<<'
 echo '>>>>> ENJOY!!! :) <<<<<'

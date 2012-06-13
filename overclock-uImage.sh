@@ -20,13 +20,13 @@
 #
 #
 DEVICE=$1
-WORKDIR=NEWBOOT
+#WORKDIR=OVERCLOCKED
 #
 UIMAGE=uImage
 #
 FWD=`pwd`
 #<>#cd $FWD/../../../../out/target/product/$DEVICE
-cd $FWD/IMAGES
+cd $FWD/IMAGES/OVERCLOCKED
 SWD=`pwd`
 #
 #####-----
@@ -36,14 +36,14 @@ SWD=`pwd`
 ##////////////////////////////////////////////////////////////
 #
 echo '>>>>> Remove old files'
-rm -rf $WORKDIR
-mkdir -p $WORKDIR
+rm -rf $DEVICE
+mkdir -p $DEVICE
 #<>#echo '>>>>> Build initramfs'
 #<>#cd $SWD/root
 #<>#find * | cpio -C 1 -R root:root -H newc -o > ../$WORKDIR/initramfs.new.cpio
-cp $FWD/$DEVICE/${UIMAGE} $SWD/$WORKDIR
-cp $FWD/mkimage $SWD/$WORKDIR
-cd $SWD/$WORKDIR
+cp $FWD/$DEVICE/${UIMAGE} $SWD/$DEVICE
+cp $FWD/mkimage $SWD/$DEVICE
+cd $SWD/$DEVICE
 #
 ##////////////////////////////////////////////////////////////
 # Checking for uImage magic word
